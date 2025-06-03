@@ -46,12 +46,12 @@ function BorrowerPanelModal({ debts, onClose, onRepay, onRequestExtension, accen
       return;
     }
     if (amt > max) {
-      setError(`Cannot repay more than $${max}`);
+      setError(`Cannot repay more than ${formatINR(max)}`);
       return;
     }
     setError('');
     setConfirmation(
-      `Repayment of $${amt} to ${selectedDebt.borrower} using ${payMethod} successful!`
+      `Repayment of ${formatINR(amt)} to ${selectedDebt.borrower} using ${payMethod} successful!`
     );
     if (typeof onRepay === "function") {
       onRepay(selectedDebt.id, amt, payMethod);
@@ -88,7 +88,7 @@ function BorrowerPanelModal({ debts, onClose, onRepay, onRequestExtension, accen
           <option value="">-- Choose Borrower --</option>
           {outstandingDebts.map(d => (
             <option key={d.id} value={d.id}>
-              {d.borrower} - ${d.amount} {d.currency}
+              {d.borrower} - {formatINR(d.amount)} (₹)
             </option>
           ))}
         </select>
@@ -109,7 +109,7 @@ function BorrowerPanelModal({ debts, onClose, onRepay, onRequestExtension, accen
           <ul style={{ fontSize: 15, paddingLeft: 20, margin: 0 }}>
             {repayments.map((h, i) => (
               <li key={i} style={{ margin: "0 0 3px 0" }}>
-                Paid <b>${h.amount}</b> on <span style={{ color: "#c4fbf3", fontWeight: 400 }}>{h.date}</span> via <i>{h.method}</i>
+                Paid <b>{formatINR(h.amount)}</b> on <span style={{ color: "#c4fbf3", fontWeight: 400 }}>{h.date}</span> via <i>{h.method}</i>
               </li>
             ))}
           </ul>
@@ -129,7 +129,7 @@ function BorrowerPanelModal({ debts, onClose, onRepay, onRequestExtension, accen
           <div>
             <span style={{ fontWeight: 500 }}>Amount Remaining:</span>{" "}
             <span style={{ color: accent, fontWeight: 700 }}>
-              ${selectedDebt.amount}
+              {formatINR(selectedDebt.amount)}
             </span>
           </div>
         </div>
@@ -164,10 +164,10 @@ function BorrowerPanelModal({ debts, onClose, onRepay, onRequestExtension, accen
                   setError('');
                 }}
                 required
-                placeholder="Enter amount"
+                placeholder="Enter amount in ₹"
               />
               <span style={{ color: "#bcf8bb", fontWeight: 400, fontSize: 13 }}>
-                (max ${selectedDebt.amount})
+                (max {formatINR(selectedDebt.amount)})
               </span>
             </div>
             <div style={{ marginBottom: 12 }}>

@@ -499,7 +499,7 @@ function AddLendingModal({onAdd, onCancel, primary, accent}) {
   const [fields, setFields] = useState({
     borrower: '',
     amount: '',
-    currency: 'USD',
+    currency: 'INR',
     lentDate: (new Date()).toISOString().slice(0,10),
     dueDate: '',
     reason: '',
@@ -524,10 +524,19 @@ function AddLendingModal({onAdd, onCancel, primary, accent}) {
         <label>Name of Borrower <span style={{color:accent}}>*</span></label><br/>
         <input name="borrower" required value={fields.borrower} onChange={onChange} style={inputStyle()} /><br/>
         <label>Amount <span style={{color:accent}}>*</span></label><br/>
-        <input name="amount" type="number" required min="1" value={fields.amount} onChange={onChange} style={inputStyle()} /><br/>
+        <input
+          name="amount"
+          type="number"
+          required
+          min="1"
+          value={fields.amount}
+          onChange={onChange}
+          style={inputStyle()}
+          placeholder="Enter amount in ₹"
+        /><br/>
         <label>Currency</label><br/>
-        <select name="currency" value={fields.currency} onChange={onChange} style={inputStyle()} >
-          <option>USD</option><option>EUR</option><option>GBP</option>
+        <select name="currency" value={fields.currency} onChange={onChange} style={inputStyle()} disabled>
+          <option value="INR">INR (₹)</option>
         </select><br/>
         <label>Lent Date</label><br/>
         <input name="lentDate" type="date" value={fields.lentDate} onChange={onChange} style={inputStyle()} /><br/>
