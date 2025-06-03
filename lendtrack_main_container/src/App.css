@@ -175,6 +175,91 @@ body {
   border-collapse: collapse;
 }
 
+/* Debt List table inside debts-centered-box */
+.debts-table {
+  width: 100%;
+  max-width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  table-layout: fixed; /* Force columns to fit within width */
+  background: transparent;
+  font-size: 1rem;
+}
+
+.debts-table th,
+.debts-table td {
+  border-bottom: 1px solid #263045;
+  padding: 10px 8px;
+  color: #fff;
+  text-align: left;
+  white-space: nowrap; /* Prevent cell text wrapping by default */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px; /* Limit max width per column */
+  font-weight: 400;
+}
+
+.debts-table th {
+  color: var(--base-light, #00ffff);
+  background: rgba(45,156,219,0.085);
+  font-weight: 700;
+}
+
+.debts-table td.actions-cell {
+  min-width: 210px;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Responsive scroll wrapper for wide tables */
+.debts-table-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* On small screens, allow more wrapping and scroll */
+@media (max-width: 720px) {
+  .debts-centered-box {
+    padding: 20px 4vw 20px 4vw;
+    min-width: 220px;
+  }
+  .debts-table {
+    min-width: 500px;
+    font-size: 0.97rem;
+  }
+  .debts-table th,
+  .debts-table td {
+    max-width: 95px;
+    padding: 7px 5px;
+  }
+  .debts-table td.actions-cell {
+    min-width: 150px;
+  }
+}
+@media (max-width: 460px) {
+  .debts-table th,
+  .debts-table td {
+    max-width: 60px;
+    font-size: 0.92rem;
+    padding: 6px 2px;
+  }
+  .debts-table {
+    min-width: 340px;
+  }
+}
+
+/* Hide horizontal overflow on x if possible */
+.debts-centered-box::-webkit-scrollbar,
+.debts-table-scroll-wrapper::-webkit-scrollbar {
+  height: 6px;
+  background: #212733;
+}
+.debts-centered-box::-webkit-scrollbar-thumb,
+.debts-table-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: var(--base-light, #00ffff);
+  border-radius: 6px;
+}
+
 footer {
   color: var(--text-secondary);
   text-align: center;
