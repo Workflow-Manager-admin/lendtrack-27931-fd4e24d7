@@ -207,6 +207,54 @@ function DashboardPage() {
   // --- UI Handlers and Layout ---
   return (
     <div className="app" style={{ background: COLORS.dark, minHeight: "100vh" }}>
+      {/* Role Toggle - For DEMO only, remove from production */}
+      <div style={{
+        position: "fixed",
+        top: 14,
+        right: 20,
+        zIndex: 3001,
+        background: "#164563",
+        color: "#fff",
+        padding: "6px 13px",
+        borderRadius: 9,
+        fontSize: 14,
+        boxShadow: "0 1px 6px #111a"
+      }}>
+        Role:
+        <button
+          className="btn"
+          style={{
+            ...miniBtnStyle(userRole === 'lender' ? COLORS.primary : "#555c"),
+            marginLeft: 10,
+            marginRight: 4,
+            padding: "5px 8px",
+            border: userRole === 'lender' ? "2.2px solid " + COLORS.primary : "none",
+            opacity: userRole === 'lender' ? 1 : 0.7,
+            fontWeight: userRole === 'lender' ? 700 : 400
+          }}
+          onClick={() => setUserRole('lender')}
+          tabIndex={-1}
+        >Lender</button>
+        <button
+          className="btn"
+          style={{
+            ...miniBtnStyle(userRole === 'borrower' ? COLORS.accent : "#555c"),
+            marginLeft: 2,
+            padding: "5px 8px",
+            border: userRole === 'borrower' ? "2.2px solid " + COLORS.accent : "none",
+            opacity: userRole === 'borrower' ? 1 : 0.7,
+            fontWeight: userRole === 'borrower' ? 700 : 400
+          }}
+          onClick={() => setUserRole('borrower')}
+          tabIndex={-1}
+        >Borrower</button>
+        <span style={{
+          marginLeft: 9,
+          fontWeight: 400,
+          color: "#aee",
+          opacity: 0.82
+        }}>{userRole === 'lender' ? "You are a Lender" : "You are a Borrower"}</span>
+      </div>
       {/* LendTrack Navbar */}
       <nav className="navbar" style={{ background: "#212733", borderBottom: `2px solid ${COLORS.primary}` }}>
         <div className="container" style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
@@ -214,9 +262,12 @@ function DashboardPage() {
             <span className="logo-symbol" style={{fontSize:'1.2em'}}>₤</span> LendTrack
           </div>
           <div style={{display: 'flex', gap: '14px'}}>
-            <button className="btn" style={settingsBtnStyle(COLORS)} onClick={()=>setShowSettings(!showSettings)}>
-              ⚙️ Settings
-            </button>
+            {/* Only lenders can see/access Settings */}
+            {userRole === 'lender' && (
+              <button className="btn" style={settingsBtnStyle(COLORS)} onClick={()=>setShowSettings(!showSettings)}>
+                ⚙️ Settings
+              </button>
+            )}
             <button className="btn" style={primaryBtnStyle(COLORS)} onClick={()=>setShowAddForm(true)}>
               + Add Lending
             </button>
@@ -298,8 +349,8 @@ function DashboardPage() {
             />
           }
 
-          {/* Settings Modal */}
-          {showSettings &&
+          {/* Settings Modal - Lender only */}
+          {userRole === 'lender' && showSettings &&
             <SettingsModal
               reminderSettings={reminderSettings}
               setReminderSettings={setReminderSettings}
