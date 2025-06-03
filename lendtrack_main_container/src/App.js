@@ -465,7 +465,9 @@ function DebtDetailModal({debt, onClose, onMarkPaid, reminderSettings, onSendRem
         <strong>Lent on:</strong> {debt.lentDate }<br/>
         <strong>Due:</strong> {debt.dueDate}<br/>
         <strong>Reason:</strong> <i>{debt.reason}</i><br/>
-        <strong>Status:</strong> <span style={{color: debt.status==='repaid'?accent:primary}}>{debt.status.toUpperCase()}</span><br/>
+        <strong>Status:</strong> <span style={{color: debt.status==='repaid'?accent:primary}}>
+          {debt.status === 'not paid' ? 'NOT PAID' : debt.status.toUpperCase()}
+        </span><br/>
         <strong>Sent Anonymously?</strong> {debt.isAnonymous ? "Yes" : "No"}
       </div>
       <div style={{marginBottom:14}}>
