@@ -354,7 +354,6 @@ function App() {
 
 // Summary card for stats
 function SummaryCard({label, value, color, icon, darkText, tooltip}) {
-  // Tooltip logic only applied if tooltip prop is true (used for Outstanding metric)
   return (
     <div
       style={{
@@ -377,42 +376,7 @@ function SummaryCard({label, value, color, icon, darkText, tooltip}) {
       <div style={{fontSize: 14, opacity: 0.9, position: "relative"}}>
         {tooltip
           ? (
-            <span
-              style={{position: "relative"}}
-              onMouseEnter={e => {
-                const tooltipNode = e.currentTarget.querySelector(".outstanding-tooltip");
-                if (tooltipNode) {
-                  tooltipNode.style.visibility = "visible";
-                  tooltipNode.style.opacity = "1";
-                  tooltipNode.style.pointerEvents = 'auto';
-                }
-              }}
-              onMouseLeave={e => {
-                const tooltipNode = e.currentTarget.querySelector(".outstanding-tooltip");
-                if (tooltipNode) {
-                  tooltipNode.style.visibility = "hidden";
-                  tooltipNode.style.opacity = "0";
-                  tooltipNode.style.pointerEvents = 'none';
-                }
-              }}
-              onFocus={e => {
-                const tooltipNode = e.currentTarget.querySelector(".outstanding-tooltip");
-                if (tooltipNode) {
-                  tooltipNode.style.visibility = "visible";
-                  tooltipNode.style.opacity = "1";
-                  tooltipNode.style.pointerEvents = 'auto';
-                }
-              }}
-              onBlur={e => {
-                const tooltipNode = e.currentTarget.querySelector(".outstanding-tooltip");
-                if (tooltipNode) {
-                  tooltipNode.style.visibility = "hidden";
-                  tooltipNode.style.opacity = "0";
-                  tooltipNode.style.pointerEvents = 'none';
-                }
-              }}
-              tabIndex={0}
-            >
+            <span style={{position: "relative"}} tabIndex={0}>
               {label}
             </span>
           )
