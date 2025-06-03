@@ -273,6 +273,8 @@ function DashboardPage() {
               onMarkPaid={markDebtPaid}
               accent={COLORS.accent}
               primary={COLORS.primary}
+              onRepayFull={debt => setRepayModal({ open: true, debt, mode: "full" })}
+              onRepayInstallment={debt => setRepayModal({ open: true, debt, mode: "installment" })}
             />
           </div>
 
