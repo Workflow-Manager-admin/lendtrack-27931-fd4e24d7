@@ -235,7 +235,7 @@ function DashboardPage() {
               <SummaryCard label="Total Lent" value={totalLent} color={COLORS.secondary} darkText={true} icon="🔢"/>
               <SummaryCard
                 label="Not Paid"
-                value={outstanding}
+                value={notPaid}
                 color={COLORS.primary}
                 icon="💰"
               />
@@ -420,7 +420,9 @@ function DebtList({
             <td title={d.dueDate}>{d.dueDate}</td>
             <td title={d.reason}>{d.reason}</td>
             <td style={{ color: d.status === "repaid" ? accent : primary, fontWeight: 700 }}>
-              {d.status.charAt(0).toUpperCase() + d.status.slice(1)}
+              {d.status === "not paid"
+                ? "Not Paid"
+                : d.status.charAt(0).toUpperCase() + d.status.slice(1)}
             </td>
             <td className="actions-cell">
               <div className="debt-actions-btn-row">
