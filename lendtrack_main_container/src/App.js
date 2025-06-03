@@ -711,13 +711,22 @@ function OutstandingLabelWithTooltip() {
 
   // Touch support: treat tap as toggle on info icon
   // Hide after delay for accessibility on blur/touch out
-  let hideTimeout = null;
+  const hideTimeoutRef = React.useRef();
   function delayedHide() {
-    hideTimeout = setTimeout(() => setShow(false), 120);
+    if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+    hideTimeoutRef.current = setTimeout(() => setShow(false), 120);
   }
   function clearHideTimeout() {
-    if (hideTimeout) clearTimeout(hideTimeout);
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
   }
+  React.useEffect(() => {
+    return () => {
+      if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+    }
+  }, []);
 
   return (
     <span style={{ display: "inline-flex", alignItems: "center", position: "relative" }}>
@@ -771,39 +780,15 @@ function OutstandingLabelWithTooltip() {
         ?
       </span>
       {/* Floating tooltip */}
-      {show && (
-        <span
-          id={tooltipId}
-          role="tooltip"
-          aria-live="polite"
-          style={{
-            position: "absolute",
-            left: "50%",
-            transform: "translateX(-50%)",
-            bottom: "120%",
-            minWidth: 210,
-            background: "#161e27",
-            color: "#fff",
-            border: "1.5px solid #2d9cdb",
-            borderRadius: 7,
-            padding: "10px 16px",
-            whiteSpace: "normal",
-            boxShadow: "0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330",
-            zIndex: 90,
-            fontSize: 14.2,
-            fontWeight: 500,
-            pointerEvents: "none", // disables accidental hover in tooltip
-            userSelect: "text",
-            textAlign: "left",
-            // Animation
-            opacity: 1,
-            transition: "opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17)",
-          }}
-        >
-          <b>Outstanding</b>: Amount lent out that has not yet been repaid.<br/>
-          <span style={{opacity:0.65, fontWeight:400, fontSize:13}}>Tap or press "?" or "Outstanding" for info</span>
-        </span>
-      )}
+      <span
+        id={tooltipId}
+        role="tooltip"
+        aria-live="polite"
+        className={`outstanding-tooltip${show ? " visible" : ""}`}
+      >
+        <b>Outstanding</b>: Amount lent out that has not yet been repaid.<br/>
+        <span style={{opacity:0.65, fontWeight:400, fontSize:13}}>Tap or press "?" or "Outstanding" for info</span>
+      </span>
     </span>
   );
 }
