@@ -27,13 +27,32 @@ const REMINDER_TONES = [
   { name: 'Formal', value: 'formal' }
 ];
 
+/**
+ * Formats a number as Indian Rupees with comma separators and the ₹ symbol.
+ * @param {number|string} amount
+ * @returns {string}
+ */
+// PUBLIC_INTERFACE
+function formatINR(amount) {
+  if (typeof amount === "string") amount = parseFloat(amount);
+  if (isNaN(amount)) return "₹0";
+  // Use Intl API for Indian formatting
+  return (
+    "₹" +
+    amount.toLocaleString("en-IN", {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 0,
+    })
+  );
+}
+
 // Sample starting debt list data
 const initialDebts = [
   {
     id: 1,
     borrower: 'Alice Smith',
     amount: 100,
-    currency: 'USD',
+    currency: 'INR',
     lentDate: '2024-04-05',
     dueDate: '2024-05-07',
     reason: 'Dinner outing',
@@ -48,7 +67,7 @@ const initialDebts = [
     id: 2,
     borrower: 'Bob Jones',
     amount: 200,
-    currency: 'USD',
+    currency: 'INR',
     lentDate: '2024-03-20',
     dueDate: '2024-04-20',
     reason: 'Concert tickets',
@@ -57,14 +76,14 @@ const initialDebts = [
     remindersSent: 2,
     history: [
       { type: 'reminder', date: '2024-03-28', tone: 'funny', via: 'sms', anonymous: true },
-      { type: 'repayment', date: '2024-04-20', method: 'Venmo' },
+      { type: 'repayment', date: '2024-04-20', method: 'UPI' },
     ],
   },
   {
     id: 3,
     borrower: 'Cara Miller',
     amount: 150,
-    currency: 'USD',
+    currency: 'INR',
     lentDate: '2023-12-01',
     dueDate: '2024-02-01',
     reason: 'Short-term rent help',
@@ -329,7 +348,9 @@ function App() {
 
 // --- COMPONENTS ---
 
-// Summary card for stats
+/**
+ * Summary card for stats
+ */
 function SummaryCard({label, value, color, icon, darkText, tooltip}) {
   return (
     <div
@@ -349,7 +370,7 @@ function SummaryCard({label, value, color, icon, darkText, tooltip}) {
       }}
     >
       <span style={{fontSize: "1.8em", lineHeight: 1}}>{icon}</span>
-      <div style={{fontWeight: 700, fontSize: "1.2em"}}>${value}</div>
+      <div style={{fontWeight: 700, fontSize: "1.2em"}}>{formatINR(value)}</div>
       <div style={{fontSize: 14, opacity: 0.9, position: "relative"}}>
         {tooltip
           ? (
@@ -394,7 +415,7 @@ function DebtList({debts, onView, onRemind, onMarkPaid, accent, primary}) {
             borderBottom: "1px solid #242F36"
           }}>
             <td style={tblCell()}>{d.borrower}</td>
-            <td style={tblCell()}>${d.amount}</td>
+            <td style={tblCell()}>{formatINR(d.amount)}</td>
             <td style={tblCell()}>{d.dueDate}</td>
             <td style={tblCell()}>{d.reason}</td>
             <td style={tblCell({color: d.status === 'repaid' ? accent : primary, bold:true})}>
