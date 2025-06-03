@@ -108,6 +108,8 @@ function DashboardPage() {
   });
   // Dedicated Borrower Panel modal state
   const [showBorrowerPanel, setShowBorrowerPanel] = useState(false);
+  // New: modal state for row-level full/installment payment, tracks {debt, mode}
+  const [repayModal, setRepayModal] = useState({ open: false, debt: null, mode: null });
 
   // --- Stats Aggregation ---
   const totalLent = debts.reduce((acc, d) => acc + d.amount, 0);
@@ -212,25 +214,7 @@ function DashboardPage() {
             <button className="btn" style={settingsBtnStyle(COLORS)} onClick={()=>setShowSettings(!showSettings)}>
               ⚙️ Settings
             </button>
-            {/* Dedicated Borrower Panel button here */}
-            <button
-              className="btn"
-              style={{
-                ...primaryBtnStyle(COLORS),
-                background: "#1cd1e8",
-                color: "#181C20",
-                border: "2px solid #2D9CDB",
-                fontWeight: 800,
-                boxShadow: "0 4px 18px 0 #00ffff55",
-                padding: "10px 26px",
-                borderRadius: 7,
-                fontSize: "1.05em"
-              }}
-              onClick={()=>setShowBorrowerPanel(true)}
-              aria-label="Open Borrower Panel"
-            >
-              Borrower Panel
-            </button>
+            {/* Removed Borrower Panel button per new requirement */}
             <button className="btn" style={primaryBtnStyle(COLORS)} onClick={()=>setShowAddForm(true)}>
               + Add Lending
             </button>
@@ -252,11 +236,13 @@ function DashboardPage() {
             <SummaryCard label="Repaid" value={repaid} color={COLORS.accent} icon="✅"/>
           </section>
 
-          {/* Dedicated Borrower Panel Modal */}
-          {showBorrowerPanel && (
-            <BorrowerPanelModal
-              debts={debts}
-              onClose={() => setShowBorrowerPanel(false)}
+          {/* Removed centralized Borrower Panel Modal */}
+          {/* New: Per-row Repayment Modal, open if repayModal.open */}
+          {repayModal.open && repayModal.debt && (
+            <RepaymentModal
+              debt={repayModal.debt}
+              mode={repayModal.mode}
+              onClose={() => setRepayModal({ open: false, debt: null, mode: null })}
               onRepay={borrowerRepay}
               onRequestExtension={borrowerRequestExtension}
               accent={COLORS.accent}
