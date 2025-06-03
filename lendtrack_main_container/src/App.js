@@ -374,7 +374,10 @@ function SummaryCard({label, value, color, icon, darkText, tooltip}) {
 }
 
 // List debts on dashboard
-function DebtList({debts, onView, onRemind, onMarkPaid, accent, primary}) {
+function DebtList({
+  debts, onView, onRemind, onMarkPaid, accent, primary,
+  onRepayFull, onRepayInstallment
+}) {
   if (!debts.length)
     return <div style={{padding: 12, color: "#D5DDE6"}}>No debts found.</div>;
 
@@ -418,6 +421,13 @@ function DebtList({debts, onView, onRemind, onMarkPaid, accent, primary}) {
                   </button>
                   <button className="btn" style={miniBtnStyle(accent)} onClick={()=>onMarkPaid(d.id)}>
                     Mark Paid
+                  </button>
+                  {/* Add repayment buttons */}
+                  <button className="btn" style={miniBtnStyle(accent)} onClick={() => onRepayFull(d)}>
+                    Full Payment
+                  </button>
+                  <button className="btn" style={miniBtnStyle(primary)} onClick={() => onRepayInstallment(d)}>
+                    Installment Payment
                   </button>
                 </>
               }
