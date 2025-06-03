@@ -451,19 +451,26 @@ function DebtList({ debts, colors, onView, onReminder, onMarkPaid }) {
               </span>
             </td>
             <td style={tdStyle}>
-              <button
-                className="lt-btn"
-                style={{ background: colors.primary, color: "#fff", marginRight: 8 }}
-                onClick={() => onView(d)}
-              >
-                View
-              </button>
-              <span style={{ display: "inline-flex", gap: 7, verticalAlign: "middle" }}>
+              <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: '10px',
+                alignItems: 'center'
+              }}>
+                <button
+                  className="lt-btn"
+                  style={{ background: colors.primary, color: "#fff" }}
+                  onClick={() => onView(d)}
+                  aria-label={`View details for debt to ${d.borrower}`}
+                >
+                  View
+                </button>
                 <button
                   className="lt-btn"
                   style={{ background: colors.accent, color: "#fff" }}
                   disabled={d.status !== "outstanding"}
                   onClick={() => onReminder(d.id)}
+                  aria-label={`Send reminder for debt to ${d.borrower}`}
                 >
                   Send Reminder
                 </button>
@@ -472,10 +479,11 @@ function DebtList({ debts, colors, onView, onReminder, onMarkPaid }) {
                   style={{ background: colors.secondary, color: colors.bg }}
                   disabled={d.status !== "outstanding"}
                   onClick={() => onMarkPaid(d.id)}
+                  aria-label={`Mark as paid for debt to ${d.borrower}`}
                 >
                   Mark as Paid
                 </button>
-              </span>
+              </div>
             </td>
           </tr>
         ))}
