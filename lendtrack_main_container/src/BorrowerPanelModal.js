@@ -1,6 +1,22 @@
 import React, { useState } from "react";
 
 /**
+ * Formats amount as INR with ₹ and Indian separators.
+ * @param {number|string} amount
+ */
+function formatINR(amount) {
+  if (typeof amount === "string") amount = parseFloat(amount);
+  if (isNaN(amount)) return "₹0";
+  return (
+    "₹" +
+    amount.toLocaleString("en-IN", {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 0,
+    })
+  );
+}
+
+/**
  * BorrowerPanelModal - Modal for borrowers to select their debt, see owing details,
  * choose a payment method (GPay, PhonePe, PayPal), and "Pay" (simulated).
  * @param {Array} debts - Debts to select from.
