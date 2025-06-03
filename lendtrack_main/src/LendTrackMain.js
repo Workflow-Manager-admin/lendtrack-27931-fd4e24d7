@@ -409,6 +409,32 @@ function LendTrackMain() {
   );
 }
 
+/**
+ * Label component with accessible tooltip for Outstanding summary card
+ */
+function OutstandingWithTooltip() {
+  return (
+    <Tooltip content="Money you have lent out but not yet been repaid.">
+      <span tabIndex={0} style={{display: "inline-flex", alignItems: "center", gap: 5}}>
+        Outstanding
+        <span
+          aria-hidden="true"
+          style={{
+            fontSize: 18,
+            color: "#fff",
+            opacity: 0.7,
+            marginLeft: 2,
+            lineHeight: 1,
+            cursor: "pointer"
+          }}
+        >
+          &#x1F6C8;
+        </span>
+      </span>
+    </Tooltip>
+  );
+}
+
 // PUBLIC_INTERFACE
 function DashboardCard({ color, textColor, title, amount }) {
   return (
