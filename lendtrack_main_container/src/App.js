@@ -224,19 +224,27 @@ function DashboardPage() {
 
       {/* Main Content */}
       <main>
-        <div className="container" style={{marginTop: 90, marginBottom: 40}}>
-          <section style={{display: "flex", gap: "24px", marginBottom: 32, flexWrap: "wrap"}}>
-            <SummaryCard label="Total Lent" value={totalLent} color={COLORS.secondary} darkText={true} icon="🔢"/>
-            <SummaryCard
-              label="Outstanding"
-              value={outstanding}
-              color={COLORS.primary}
-              icon="💰"
-            />
-            <SummaryCard label="Repaid" value={repaid} color={COLORS.accent} icon="✅"/>
-          </section>
+        {/* Center the entire debts section vertically & horizontally on dashboard */}
+        <div className="full-center-viewport">
+          <div className="stats-bar" style={{marginBottom: 36}}>
+            <section style={{
+                display: "flex",
+                gap: "24px",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                width: "100%"
+              }}>
+              <SummaryCard label="Total Lent" value={totalLent} color={COLORS.secondary} darkText={true} icon="🔢"/>
+              <SummaryCard
+                label="Outstanding"
+                value={outstanding}
+                color={COLORS.primary}
+                icon="💰"
+              />
+              <SummaryCard label="Repaid" value={repaid} color={COLORS.accent} icon="✅"/>
+            </section>
+          </div>
 
-          {/* Removed centralized Borrower Panel Modal */}
           {/* New: Per-row Repayment Modal, open if repayModal.open */}
           {repayModal.open && repayModal.debt && (
             <RepaymentModal
@@ -250,27 +258,9 @@ function DashboardPage() {
             />
           )}
 
-          {/* Debt List */}
-          <div style={{
-            background: COLORS.surface,
-            borderRadius: 12,
-            boxShadow: "0 2px 8px rgba(40,56,80,0.10)",
-            padding: 18,
-            marginBottom: 18,
-            width: "100%",
-            // Remove fixed height, maxHeight, minHeight, and overflow to allow full content display
-            maxHeight: "none",
-            minHeight: 0,
-            height: "auto",
-            overflow: "visible"
-          }}>
-            <h2 style={{
-              fontSize: "1.3rem",
-              fontWeight: 600,
-              marginBottom: 6,
-              color: COLORS.primary,
-              letterSpacing: 0.5,
-            }}>Your Debts</h2>
+          {/* Centered/Prominent Debt List Box */}
+          <div className="debts-centered-box">
+            <h2 className="debts-title">Your Debts</h2>
             {debts.length === 0 && <div style={{color: COLORS.secondary, padding: 16}}>No records. Log a new lending above!</div>}
             <DebtList
               debts={debts}
@@ -283,6 +273,7 @@ function DashboardPage() {
               onRepayInstallment={debt => setRepayModal({ open: true, debt, mode: "installment" })}
             />
           </div>
+        </div>
 
           {/* Details Modal (read-only for borrower actions) */}
           {selectedDebt &&
