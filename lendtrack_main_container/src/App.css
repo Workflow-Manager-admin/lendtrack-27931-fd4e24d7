@@ -6,59 +6,7 @@
   --border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Outstanding Tooltip Styles - Unified, floating, accessible, visually distinct */
-.outstanding-tooltip {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 120%;
-  min-width: 210px;
-  max-width: 320px;
-  background: #161e27;
-  color: #fff;
-  border: 1.5px solid #2d9cdb;
-  border-radius: 7px;
-  padding: 10px 16px;
-  white-space: normal;
-  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
-  z-index: 500;
-  font-size: 14.2px;
-  font-weight: 500;
-  pointer-events: none;
-  user-select: text;
-  text-align: left;
-  opacity: 0;
-  transition: opacity 0.16s cubic-bezier(.42,1.97,.56,-0.17);
-  display: block;
-}
-.outstanding-tooltip.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
 
-/* Info icon focus: visually highlight */
-.outstanding-tooltip-icon:focus {
-  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
-  outline: 2px solid #2d9cdb;
-}
-
-/* Responsive for mobile: tooltip above and stretches if needed */
-@media (max-width: 600px) {
-  .outstanding-tooltip {
-    left: 0;
-    right: 0;
-    min-width: 90vw;
-    max-width: 98vw;
-    transform: none;
-    font-size: 14px;
-    padding: 10px 10px;
-    line-break: anywhere;
-  }
-  .outstanding-tooltip.visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
 
 body {
   margin: 0;

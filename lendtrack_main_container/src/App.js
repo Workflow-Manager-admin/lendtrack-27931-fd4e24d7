@@ -217,11 +217,10 @@ function DashboardPage() {
           <section style={{display: "flex", gap: "24px", marginBottom: 32, flexWrap: "wrap"}}>
             <SummaryCard label="Total Lent" value={totalLent} color={COLORS.secondary} darkText={true} icon="🔢"/>
             <SummaryCard
-              label={<OutstandingLabelWithTooltip />}
+              label="Outstanding"
               value={outstanding}
               color={COLORS.primary}
               icon="💰"
-              tooltip
             />
             <SummaryCard label="Repaid" value={repaid} color={COLORS.accent} icon="✅"/>
           </section>
