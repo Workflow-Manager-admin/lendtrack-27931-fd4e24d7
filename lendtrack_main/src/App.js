@@ -3,12 +3,11 @@ import './App.css';
 import LendTrackMain from './LendTrackMain';
 import Welcome from './Welcome';
 
-// Import react-router-dom components and hooks according to v7+ API
+// Import react-router-dom components/hooks per v6+ API
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
 /**
- * Welcome wrapper to handle navigation on "Get Started"
- * Uses the useNavigate hook, which is only valid inside <Routes>.
+ * WelcomeWithNav - a wrapper for Welcome that handles navigation via useNavigate.
  */
 function WelcomeWithNav() {
   const navigate = useNavigate();
