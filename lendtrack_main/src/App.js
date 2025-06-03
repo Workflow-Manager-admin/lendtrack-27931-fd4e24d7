@@ -3,7 +3,10 @@ import './App.css';
 import LendTrackMain from './LendTrackMain';
 import Welcome from './Welcome';
 
-// Import react-router-dom components/hooks per v6+ API
+/*
+  Using react-router-dom v7.6.1 (v6+ API required).
+  Ensuring the correct API usage: BrowserRouter, Routes, Route, useNavigate.
+*/
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
 /**
