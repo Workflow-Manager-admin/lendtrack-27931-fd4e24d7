@@ -460,12 +460,8 @@ function DebtList({debts, onView, onRemind, onMarkPaid, accent, primary}) {
   );
 }
 
-// Modal for showing full debt details and borrower actions
-function DebtDetailModal({debt, onClose, onMarkPaid, reminderSettings, onSendReminder, onRepay, onRequestExtension, accent, primary}) {
-  const [showBorrowerActions, setShowBorrowerActions] = useState(false);
-  const [repayAmount, setRepayAmount] = useState(debt.amount);
-  const [repayMethod, setRepayMethod] = useState('Venmo');
-
+// Modal for showing full debt details (borrower actions removed for dedicated Borrower Panel)
+function DebtDetailModal({debt, onClose, onMarkPaid, reminderSettings, onSendReminder, accent, primary}) {
   return (
     <Modal onClose={onClose}>
       <h2 style={{ color: primary }}>Debt Details</h2>
@@ -486,32 +482,6 @@ function DebtDetailModal({debt, onClose, onMarkPaid, reminderSettings, onSendRem
         <div style={{marginBottom:16}}>
           <button className="btn" style={miniBtnStyle(accent)} onClick={()=>onMarkPaid(debt.id)}>
             Mark Paid
-          </button>
-          <button className="btn" style={miniBtnStyle(primary)} onClick={()=>setShowBorrowerActions(x=>!x)}>
-            {showBorrowerActions ? "Hide" : "Borrower Actions"}
-          </button>
-        </div>
-      }
-      {/* Borrower Sim --> acts as the borrower's UI */}
-      {showBorrowerActions && debt.status !== 'repaid' &&
-        <div style={{padding: 10, background: "#242F31", borderRadius: 10, marginBottom:8}}>
-          <h4 style={{margin: '8px 0', color: accent}}>Borrower Panel</h4>
-          <form onSubmit={e => {e.preventDefault(); onRepay(Number(repayAmount), repayMethod);}}>
-            <label style={{fontWeight:500}}>Repay Amount: </label>
-            <input type="number" required min="1" max={debt.amount} value={repayAmount} onChange={e=>setRepayAmount(e.target.value)}
-              style={{margin: '0 10px 5px 0', background: '#181C20', color:'#fff', border: `1px solid ${accent}`, borderRadius:4, width:80}} />
-            <label style={{fontWeight:500}}>Method: </label>
-            <select value={repayMethod} onChange={e=>setRepayMethod(e.target.value)}
-              style={{marginRight: 10, background: '#181C20', color:'#fff', border: `1px solid ${primary}`, borderRadius:4}}>
-              <option>Venmo</option>
-              <option>PayPal</option>
-              <option>Cash</option>
-              <option>Bank</option>
-            </select>
-            <button className="btn" type="submit" style={miniBtnStyle(accent)}>Repay</button>
-          </form>
-          <button className="btn" style={miniBtnStyle(primary)} onClick={onRequestExtension}>
-            Request Extension
           </button>
         </div>
       }
