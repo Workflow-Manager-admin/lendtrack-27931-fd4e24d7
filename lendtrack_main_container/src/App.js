@@ -516,30 +516,59 @@ function SettingsModal({reminderSettings, setReminderSettings, onClose, primary}
   );
 }
 
-// Modal wrapper component
+/**
+ * Modal wrapper component
+ * Ensures modal content is always fully visible by:
+ *  - making modal vertically responsive
+ *  - using maxHeight and overflow auto
+ */
 function Modal({children, onClose}) {
   return (
-    <div style={{
-      position:'fixed', top:0, left:0,right:0,bottom:0,
-      zIndex:5000,
-      background:"rgba(0,0,0,.64)"
-    }}>
-      <div style={{
-        background: "#22272D",
-        color: "#fff",
-        borderRadius: 16,
-        boxShadow: "0 4px 24px 0 #000a",
-        maxWidth: "98vw",
-        width: 400,
-        position: "fixed",
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%,-50%)",
-        padding: "32px 18px 20px 18px",
-      }}>
-        <button className="btn" style={{
-          position:"absolute", right:12, top:12, background:"transparent", color:"#fff", fontSize:22, border:"none", cursor:"pointer"
-        }} onClick={onClose} aria-label="Close">&times;</button>
+    <div
+      style={{
+        position:'fixed', top:0, left:0, right:0, bottom:0,
+        zIndex:5000,
+        background:"rgba(0,0,0,.64)"
+      }}
+    >
+      <div
+        style={{
+          background: "#22272D",
+          color: "#fff",
+          borderRadius: 16,
+          boxShadow: "0 4px 24px 0 #000a",
+          maxWidth: "98vw",
+          width: 400,
+          position: "fixed",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%,-50%)",
+          padding: "32px 18px 20px 18px",
+          maxHeight: "92vh", // ensure enough margin at top and bottom
+          overflowY: "auto",
+          overscrollBehavior: "contain"
+        }}
+        tabIndex={-1}
+        aria-modal="true"
+        role="dialog"
+      >
+        <button
+          className="btn"
+          style={{
+            position:"absolute",
+            right:12,
+            top:12,
+            background:"transparent",
+            color:"#fff",
+            fontSize:22,
+            border:"none",
+            cursor:"pointer"
+          }}
+          onClick={onClose}
+          aria-label="Close"
+        >
+          &times;
+        </button>
         {children}
       </div>
     </div>
