@@ -111,6 +111,9 @@ function App() {
   }
 
   // PUBLIC_INTERFACE
+  /**
+   * Send reminder and show confirmation to user
+   */
   function sendReminder(debtId, tone, anonymous) {
     setDebts(debts.map(d =>
       d.id === debtId
@@ -130,7 +133,8 @@ function App() {
           }
         : d
     ));
-    alert("Polite reminder sent! (simulated)");
+    // Show a proper confirmation dialog (can be replaced with custom UI)
+    window.confirm("Reminder sent! (simulated)\nYour reminder was sent to the borrower.");
   }
 
   // PUBLIC_INTERFACE
