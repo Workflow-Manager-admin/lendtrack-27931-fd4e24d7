@@ -329,24 +329,72 @@ function App() {
 // --- COMPONENTS ---
 
 // Summary card for stats
-function SummaryCard({label, value, color, icon, darkText}) {
+function SummaryCard({label, value, color, icon, darkText, tooltip}) {
+  // Tooltip logic only applied if tooltip prop is true (used for Outstanding metric)
   return (
-    <div style={{
-      background: color,
-      color: darkText ? "#222" : "#fff",
-      borderRadius: 12,
-      minWidth: 148,
-      minHeight: 80,
-      flex: 1,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      boxShadow: "0 2px 6px rgba(30,30,90,0.09)",
-    }}>
+    <div
+      style={{
+        background: color,
+        color: darkText ? "#222" : "#fff",
+        borderRadius: 12,
+        minWidth: 148,
+        minHeight: 80,
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        boxShadow: "0 2px 6px rgba(30,30,90,0.09)",
+        position: "relative"
+      }}
+    >
       <span style={{fontSize: "1.8em", lineHeight: 1}}>{icon}</span>
       <div style={{fontWeight: 700, fontSize: "1.2em"}}>${value}</div>
-      <div style={{fontSize: 14, opacity: 0.9}}>{label}</div>
+      <div style={{fontSize: 14, opacity: 0.9, position: "relative"}}>
+        {tooltip
+          ? (
+            <span
+              style={{position: "relative"}}
+              onMouseEnter={e => {
+                const tooltipNode = e.currentTarget.querySelector(".outstanding-tooltip");
+                if (tooltipNode) {
+                  tooltipNode.style.visibility = "visible";
+                  tooltipNode.style.opacity = "1";
+                  tooltipNode.style.pointerEvents = 'auto';
+                }
+              }}
+              onMouseLeave={e => {
+                const tooltipNode = e.currentTarget.querySelector(".outstanding-tooltip");
+                if (tooltipNode) {
+                  tooltipNode.style.visibility = "hidden";
+                  tooltipNode.style.opacity = "0";
+                  tooltipNode.style.pointerEvents = 'none';
+                }
+              }}
+              onFocus={e => {
+                const tooltipNode = e.currentTarget.querySelector(".outstanding-tooltip");
+                if (tooltipNode) {
+                  tooltipNode.style.visibility = "visible";
+                  tooltipNode.style.opacity = "1";
+                  tooltipNode.style.pointerEvents = 'auto';
+                }
+              }}
+              onBlur={e => {
+                const tooltipNode = e.currentTarget.querySelector(".outstanding-tooltip");
+                if (tooltipNode) {
+                  tooltipNode.style.visibility = "hidden";
+                  tooltipNode.style.opacity = "0";
+                  tooltipNode.style.pointerEvents = 'none';
+                }
+              }}
+              tabIndex={0}
+            >
+              {label}
+            </span>
+          )
+          : label
+        }
+      </div>
     </div>
   );
 }
