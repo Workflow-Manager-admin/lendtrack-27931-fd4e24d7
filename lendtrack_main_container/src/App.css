@@ -52,7 +52,7 @@ body {
   padding: 36px 40px 34px 40px;
   margin-top: 0;
   margin-bottom: 20px;
-  min-width: 375px;
+  min-width: 320px;
   max-width: 810px;
   width: 100%;
   display: flex;
@@ -60,6 +60,8 @@ body {
   align-items: center;
   transition: box-shadow 0.18s;
   z-index: 3;
+  overflow-x: auto; /* Allow horizontal scroll if content overflows */
+  box-sizing: border-box;
 }
 
 .debts-centered-box:hover {
