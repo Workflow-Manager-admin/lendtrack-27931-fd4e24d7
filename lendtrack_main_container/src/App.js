@@ -234,7 +234,7 @@ function DashboardPage() {
             }}>
               <SummaryCard label="Total Lent" value={totalLent} color={COLORS.secondary} darkText={true} icon="🔢"/>
               <SummaryCard
-                label="Outstanding"
+                label="Not Paid"
                 value={outstanding}
                 color={COLORS.primary}
                 icon="💰"
