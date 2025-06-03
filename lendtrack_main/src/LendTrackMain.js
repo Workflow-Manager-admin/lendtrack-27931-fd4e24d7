@@ -453,27 +453,29 @@ function DebtList({ debts, colors, onView, onReminder, onMarkPaid }) {
             <td style={tdStyle}>
               <button
                 className="lt-btn"
-                style={{ background: colors.primary, color: "#fff" }}
+                style={{ background: colors.primary, color: "#fff", marginRight: 8 }}
                 onClick={() => onView(d)}
               >
                 View
               </button>
-              <button
-                className="lt-btn"
-                style={{ background: colors.accent, color: "#fff" }}
-                disabled={d.status !== "outstanding"}
-                onClick={() => onReminder(d.id)}
-              >
-                Send Reminder
-              </button>
-              <button
-                className="lt-btn"
-                style={{ background: colors.secondary, color: colors.bg }}
-                disabled={d.status !== "outstanding"}
-                onClick={() => onMarkPaid(d.id)}
-              >
-                Mark as Paid
-              </button>
+              <span style={{ display: "inline-flex", gap: 7, verticalAlign: "middle" }}>
+                <button
+                  className="lt-btn"
+                  style={{ background: colors.accent, color: "#fff" }}
+                  disabled={d.status !== "outstanding"}
+                  onClick={() => onReminder(d.id)}
+                >
+                  Send Reminder
+                </button>
+                <button
+                  className="lt-btn"
+                  style={{ background: colors.secondary, color: colors.bg }}
+                  disabled={d.status !== "outstanding"}
+                  onClick={() => onMarkPaid(d.id)}
+                >
+                  Mark as Paid
+                </button>
+              </span>
             </td>
           </tr>
         ))}
