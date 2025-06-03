@@ -449,7 +449,7 @@ function DebtDetailModal({debt, onClose, onMarkPaid, reminderSettings, onSendRem
       <h2 style={{ color: primary }}>Debt Details</h2>
       <div style={{marginBottom:18}}>
         <strong>Borrower:</strong> {debt.borrower}<br/>
-        <strong>Amount:</strong> <span style={{color: accent}}>${debt.amount}</span><br/>
+        <strong>Amount:</strong> <span style={{color: accent}}>{formatINR(debt.amount)}</span><br/>
         <strong>Lent on:</strong> {debt.lentDate }<br/>
         <strong>Due:</strong> {debt.dueDate}<br/>
         <strong>Reason:</strong> <i>{debt.reason}</i><br/>
@@ -479,7 +479,7 @@ function DebtDetailModal({debt, onClose, onMarkPaid, reminderSettings, onSendRem
             }
             {h.type === 'repayment' &&
               <span>
-                <span style={{color: accent}}>Repaid</span> ${h.amount || debt.amount} via {h.method} <span style={{color:'#bbb'}}>{h.date}</span>
+                <span style={{color: accent}}>Repaid</span> {formatINR(h.amount || debt.amount)} via {h.method} <span style={{color:'#bbb'}}>{h.date}</span>
               </span>
             }
             {h.type === 'extension' &&
