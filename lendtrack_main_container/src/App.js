@@ -214,7 +214,7 @@ function DashboardPage() {
             <button className="btn" style={settingsBtnStyle(COLORS)} onClick={()=>setShowSettings(!showSettings)}>
               ⚙️ Settings
             </button>
-            {/* Removed Borrower Panel button per new requirement */}
+            {/* Borrower Panel button removed as per new UI (was here) */}
             <button className="btn" style={primaryBtnStyle(COLORS)} onClick={()=>setShowAddForm(true)}>
               + Add Lending
             </button>
