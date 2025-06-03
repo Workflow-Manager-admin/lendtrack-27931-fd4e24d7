@@ -201,7 +201,7 @@ function DashboardPage() {
     alert("Repayment simulated!");
   }
 
-  // --- UI Handlers ---
+  // --- UI Handlers and Layout ---
   return (
     <div className="app" style={{ background: COLORS.dark, minHeight: "100vh" }}>
       {/* LendTrack Navbar */}
@@ -214,7 +214,6 @@ function DashboardPage() {
             <button className="btn" style={settingsBtnStyle(COLORS)} onClick={()=>setShowSettings(!showSettings)}>
               ⚙️ Settings
             </button>
-            {/* Borrower Panel button removed as per new UI (was here) */}
             <button className="btn" style={primaryBtnStyle(COLORS)} onClick={()=>setShowAddForm(true)}>
               + Add Lending
             </button>
@@ -224,16 +223,15 @@ function DashboardPage() {
 
       {/* Main Content */}
       <main>
-        {/* Center the entire debts section vertically & horizontally on dashboard */}
         <div className="full-center-viewport">
           <div className="stats-bar" style={{marginBottom: 36}}>
             <section style={{
-                display: "flex",
-                gap: "24px",
-                flexWrap: "wrap",
-                justifyContent: "center",
-                width: "100%"
-              }}>
+              display: "flex",
+              gap: "24px",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              width: "100%"
+            }}>
               <SummaryCard label="Total Lent" value={totalLent} color={COLORS.secondary} darkText={true} icon="🔢"/>
               <SummaryCard
                 label="Outstanding"
@@ -245,7 +243,7 @@ function DashboardPage() {
             </section>
           </div>
 
-          {/* New: Per-row Repayment Modal, open if repayModal.open */}
+          {/* Per-row Repayment Modal, open if repayModal.open */}
           {repayModal.open && repayModal.debt && (
             <RepaymentModal
               debt={repayModal.debt}
@@ -273,9 +271,8 @@ function DashboardPage() {
               onRepayInstallment={debt => setRepayModal({ open: true, debt, mode: "installment" })}
             />
           </div>
-        </div>
 
-          {/* Details Modal (read-only for borrower actions) */}
+          {/* Details Modal */}
           {selectedDebt &&
             <DebtDetailModal
               debt={selectedDebt}
@@ -307,7 +304,6 @@ function DashboardPage() {
               primary={COLORS.primary}
             />
           }
-          {/* End debts and modals section */}
         </div>
       </main>
 
