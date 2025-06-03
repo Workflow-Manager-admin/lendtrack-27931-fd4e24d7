@@ -307,6 +307,7 @@ function DashboardPage() {
               primary={COLORS.primary}
             />
           }
+          {/* End debts and modals section */}
         </div>
       </main>
 
