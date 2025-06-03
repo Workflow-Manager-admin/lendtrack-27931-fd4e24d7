@@ -79,8 +79,6 @@ const initialDebts = [
  * DashboardPage is extracted to support routing below.
  */
 function DashboardPage() {
-  // All state and function logic is preserved inside App previously.
-  // We'll hoist state up to App() component which renders <Routes>.
   const [debts, setDebts] = useState(initialDebts);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -89,6 +87,8 @@ function DashboardPage() {
     tone: 'soft',
     anonymous: false,
   });
+  // Dedicated Borrower Panel modal state
+  const [showBorrowerPanel, setShowBorrowerPanel] = useState(false);
 
   // --- Stats Aggregation ---
   const totalLent = debts.reduce((acc, d) => acc + d.amount, 0);
@@ -110,7 +110,14 @@ function DashboardPage() {
   }
   function markDebtPaid(debtId) {
     setDebts(debts.map(d =>
-      d.id === debtId ? { ...d, status: 'repaid', history: [...d.history, { type: 'repayment', date: (new Date()).toISOString().slice(0, 10), method: 'manual' }] } : d));
+      d.id === debtId
+        ? {
+            ...d,
+            status: 'repaid',
+            history: [...d.history, { type: 'repayment', date: (new Date()).toISOString().slice(0, 10), method: 'manual' }],
+          }
+        : d
+    ));
     setSelectedDebt(null);
   }
   function sendReminder(debtId, tone, anonymous) {
@@ -177,6 +184,25 @@ function DashboardPage() {
           <div style={{display: 'flex', gap: '14px'}}>
             <button className="btn" style={settingsBtnStyle(COLORS)} onClick={()=>setShowSettings(!showSettings)}>
               ⚙️ Settings
+            </button>
+            {/* Dedicated Borrower Panel button here */}
+            <button
+              className="btn"
+              style={{
+                ...primaryBtnStyle(COLORS),
+                background: "#1cd1e8",
+                color: "#181C20",
+                border: "2px solid #2D9CDB",
+                fontWeight: 800,
+                boxShadow: "0 4px 18px 0 #00ffff55",
+                padding: "10px 26px",
+                borderRadius: 7,
+                fontSize: "1.05em"
+              }}
+              onClick={()=>setShowBorrowerPanel(true)}
+              aria-label="Open Borrower Panel"
+            >
+              Borrower Panel
             </button>
             <button className="btn" style={primaryBtnStyle(COLORS)} onClick={()=>setShowAddForm(true)}>
               + Add Lending
@@ -246,6 +272,18 @@ function DashboardPage() {
             <SummaryCard label="Repaid" value={repaid} color={COLORS.accent} icon="✅"/>
           </section>
 
+          {/* Dedicated Borrower Panel Modal */}
+          {showBorrowerPanel && (
+            <BorrowerPanelModal
+              debts={debts}
+              onClose={() => setShowBorrowerPanel(false)}
+              onRepay={borrowerRepay}
+              onRequestExtension={borrowerRequestExtension}
+              accent={COLORS.accent}
+              primary={COLORS.primary}
+            />
+          )}
+
           {/* Debt List */}
           <div style={{
             background: COLORS.surface,
@@ -269,10 +307,10 @@ function DashboardPage() {
               onMarkPaid={markDebtPaid}
               accent={COLORS.accent}
               primary={COLORS.primary}
-              />
+            />
           </div>
 
-          {/* Details Modal */}
+          {/* Details Modal (read-only for borrower actions) */}
           {selectedDebt &&
             <DebtDetailModal
               debt={selectedDebt}
@@ -280,8 +318,6 @@ function DashboardPage() {
               onMarkPaid={markDebtPaid}
               reminderSettings={reminderSettings}
               onSendReminder={() => sendReminder(selectedDebt.id, reminderSettings.tone, reminderSettings.anonymous)}
-              onRepay={(amount, method) => borrowerRepay(selectedDebt.id, amount, method)}
-              onRequestExtension={() => borrowerRequestExtension(selectedDebt.id)}
               accent={COLORS.accent}
               primary={COLORS.primary}
             />
