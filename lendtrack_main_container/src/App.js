@@ -73,9 +73,12 @@ const initialDebts = [
   }
 ];
 
-// PUBLIC_INTERFACE
-function App() {
-  // Application-wide state
+/**
+ * DashboardPage is extracted to support routing below.
+ */
+function DashboardPage() {
+  // All state and function logic is preserved inside App previously.
+  // We'll hoist state up to App() component which renders <Routes>.
   const [debts, setDebts] = useState(initialDebts);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -91,7 +94,6 @@ function App() {
   const repaid = debts.filter(d => d.status === 'repaid').reduce((acc, d) => acc + d.amount, 0);
 
   // --- Debt Actions ---
-  // PUBLIC_INTERFACE
   function addDebt(entry) {
     setDebts([
       {
@@ -104,18 +106,11 @@ function App() {
       }, ...debts]);
     setShowAddForm(false);
   }
-
-  // PUBLIC_INTERFACE
   function markDebtPaid(debtId) {
     setDebts(debts.map(d =>
       d.id === debtId ? { ...d, status: 'repaid', history: [...d.history, { type: 'repayment', date: (new Date()).toISOString().slice(0, 10), method: 'manual' }] } : d));
     setSelectedDebt(null);
   }
-
-  // PUBLIC_INTERFACE
-  /**
-   * Send reminder and show confirmation to user
-   */
   function sendReminder(debtId, tone, anonymous) {
     setDebts(debts.map(d =>
       d.id === debtId
@@ -135,11 +130,8 @@ function App() {
           }
         : d
     ));
-    // Show a proper confirmation dialog (can be replaced with custom UI)
     window.confirm("Reminder sent! (simulated)\nYour reminder was sent to the borrower.");
   }
-
-  // PUBLIC_INTERFACE
   function borrowerRequestExtension(debtId, extraDays = 7) {
     setDebts(debts.map(d =>
       d.id === debtId
@@ -154,8 +146,6 @@ function App() {
         : d));
     alert("Extension requested (simulated)");
   }
-
-  // PUBLIC_INTERFACE
   function borrowerRepay(debtId, amount, method) {
     setDebts(debts.map(d =>
       d.id === debtId
@@ -174,8 +164,6 @@ function App() {
   }
 
   // --- UI Handlers ---
-
-  // Main Render
   return (
     <div className="app" style={{ background: COLORS.dark, minHeight: "100vh" }}>
       {/* LendTrack Navbar */}
@@ -198,7 +186,6 @@ function App() {
       {/* Main Content */}
       <main>
         <div className="container" style={{marginTop: 90, marginBottom: 40}}>
-          {/* DASHBOARD SUMMARY */}
           <section style={{display: "flex", gap: "24px", marginBottom: 32, flexWrap: "wrap"}}>
             <SummaryCard label="Total Lent" value={totalLent} color={COLORS.secondary} darkText={true} icon="🔢"/>
             <SummaryCard 
@@ -325,6 +312,19 @@ function App() {
         <span style={{color:COLORS.primary, fontWeight: 600}}>LendTrack</span> — Manage your lending with ease 😎
       </footer>
     </div>
+  );
+}
+
+// PUBLIC_INTERFACE
+function App() {
+  // Routing: show Welcome page at root, dashboard at /dashboard, and default to Welcome
+  return (
+    <Routes>
+      <Route path="/" element={<Welcome />} />
+      <Route path="/dashboard" element={<DashboardPage />} />
+      {/* For URLs not recognized, redirect to welcome */}
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
   );
 }
 
