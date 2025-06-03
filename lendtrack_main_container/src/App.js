@@ -98,6 +98,9 @@ const initialDebts = [
  * DashboardPage is extracted to support routing below.
  */
 function DashboardPage() {
+  // Added userRole: set this based on real auth/session; here for demo, it's togglable for demonstration
+  const [userRole, setUserRole] = useState('lender'); // 'lender' or 'borrower'
+
   const [debts, setDebts] = useState(initialDebts);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
