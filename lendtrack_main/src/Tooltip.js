@@ -81,36 +81,39 @@ function Tooltip({ content, children }) {
           role="tooltip"
           style={{
             position: "absolute",
-            zIndex: 999,
-            top: "calc(100% + 7px)",
+            zIndex: 1290,
+            top: "calc(100% + 8px)",
             left: "50%",
             transform: "translateX(-50%)",
             background: "#232837",
-            color: "#fff",
-            padding: "7px 14px",
-            borderRadius: "7px",
-            fontSize: "0.96rem",
-            fontWeight: 400,
+            color: "#F2F2F2",
+            padding: "10px 18px",
+            borderRadius: "10px",
+            fontSize: "1rem",
+            fontWeight: 500,
+            lineHeight: 1.38,
             whiteSpace: "pre-line",
-            boxShadow: "0 2px 10px rgba(0,0,0,0.19)",
-            minWidth: 195,
-            maxWidth: 300,
+            boxShadow: "0 3px 18px rgba(45,156,219,0.21)",
+            minWidth: 168,
+            maxWidth: 330,
             textAlign: "center",
-            pointerEvents: "none"
+            pointerEvents: "none",
+            boxSizing: "border-box",
+            border: "1.3px solid #2D9CDB"
           }}
         >
           {content}
           <span
             style={{
               position: "absolute",
-              top: -7,
+              top: -10,
               left: "50%",
               transform: "translateX(-50%)",
               width: 0,
               height: 0,
-              borderLeft: "7px solid transparent",
-              borderRight: "7px solid transparent",
-              borderBottom: "7px solid #232837"
+              borderLeft: "11px solid transparent",
+              borderRight: "11px solid transparent",
+              borderBottom: "12px solid #232837"
             }}
             aria-hidden="true"
           />
