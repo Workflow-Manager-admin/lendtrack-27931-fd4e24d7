@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Welcome from './Welcome';
-// Import the new Borrower panel modal
-import BorrowerPanelModal from './BorrowerPanelModal';
+// RepaymentModal for in-line payments (not BorrowerPanel centralized)
+import RepaymentModal from './RepaymentModal';
 
 /**
  * Colors for theme (as per LendTrack spec)
