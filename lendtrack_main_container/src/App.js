@@ -375,40 +375,56 @@ function DebtList({
   if (!debts.length)
     return <div style={{padding: 12, color: "#D5DDE6"}}>No debts found.</div>;
 
+  // Responsive scroll wrapper so table never overflows parent.
   return (
-    <div>
-      <table style={{
-        width: "100%",
-        borderCollapse: "collapse",
-        minWidth: 620,
-      }}>
+    <div className="debts-table-scroll-wrapper" style={{ maxWidth: "100%", overflowX: "auto" }}>
+      <table
+        className="debts-table"
+        style={{
+          tableLayout: "fixed", // fit columns within width
+          background: "transparent",
+        }}
+      >
+        <colgroup>
+          <col style={{ width: "20%" }} />
+          <col style={{ width: "15%" }} />
+          <col style={{ width: "18%" }} />
+          <col style={{ width: "20%" }} />
+          <col style={{ width: "13%" }} />
+          <col style={{ width: "14%" }} />
+        </colgroup>
         <thead>
-          <tr style={{fontSize: 15, color: primary, background: 'rgba(45,156,219,0.07)'}}>
-            <th style={tblCell({bold:true})}>Borrower</th>
-            <th style={tblCell()}>Amount</th>
-            <th style={tblCell()}>Due</th>
-            <th style={tblCell()}>Reason</th>
-            <th style={tblCell()}>Status</th>
-            <th style={tblCell()}>Actions</th>
+          <tr>
+            <th>Borrower</th>
+            <th>Amount</th>
+            <th>Due</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
         {debts.map(d => (
-          <tr key={d.id} style={{
-            background: d.status==='repaid' ? 'rgba(39,174,96,0.17)' : 'rgba(45,156,219,0.09)',
-            borderRadius: 8,
-            borderBottom: "1px solid #242F36"
-          }}>
-            <td style={tblCell()}>{d.borrower}</td>
-            <td style={tblCell()}>{formatINR(d.amount)}</td>
-            <td style={tblCell()}>{d.dueDate}</td>
-            <td style={tblCell()}>{d.reason}</td>
-            <td style={tblCell({color: d.status === 'repaid' ? accent : primary, bold:true})}>
+          <tr
+            key={d.id}
+            style={{
+              background: d.status === "repaid"
+                ? "rgba(39,174,96,0.17)"
+                : "rgba(45,156,219,0.09)",
+              borderRadius: 8,
+              borderBottom: "1px solid #242F36",
+            }}
+          >
+            <td title={d.borrower}>{d.borrower}</td>
+            <td title={formatINR(d.amount)}>{formatINR(d.amount)}</td>
+            <td title={d.dueDate}>{d.dueDate}</td>
+            <td title={d.reason}>{d.reason}</td>
+            <td style={{ color: d.status === "repaid" ? accent : primary, fontWeight: 700 }}>
               {d.status.charAt(0).toUpperCase() + d.status.slice(1)}
             </td>
-            <td style={tblCell()}>
+            <td className="actions-cell">
               <button className="btn" style={miniBtnStyle(primary)} onClick={()=>onView(d)}>View</button>
-              {d.status !== 'repaid' &&
+              {d.status !== 'repaid' && (
                 <>
                   <button className="btn" style={miniBtnStyle(primary)} onClick={()=>onRemind(d)}>
                     Remind
@@ -424,7 +440,7 @@ function DebtList({
                     Installment Payment
                   </button>
                 </>
-              }
+              )}
             </td>
           </tr>
         ))}
