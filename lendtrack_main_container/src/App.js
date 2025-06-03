@@ -156,18 +156,26 @@ function DashboardPage() {
     alert("Extension requested (simulated)");
   }
   function borrowerRepay(debtId, amount, method) {
-    setDebts(debts.map(d =>
-      d.id === debtId
-        ? {
-            ...d,
-            amount: d.amount - amount,
-            status: d.amount - amount <= 0 ? 'repaid' : d.status,
-            history: [
-              ...d.history,
-              { type: 'repayment', date: (new Date()).toISOString().slice(0, 10), method, amount }
-            ]
+    setDebts(debts.map(d => {
+      if (d.id !== debtId) return d;
+      const remaining = d.amount - amount;
+      // Don't allow negative remaining
+      const safeRemaining = remaining < 0 ? 0 : remaining;
+      return {
+        ...d,
+        amount: safeRemaining,
+        status: safeRemaining <= 0 ? 'repaid' : d.status,
+        history: [
+          ...d.history,
+          {
+            type: 'repayment',
+            date: (new Date()).toISOString().slice(0, 10),
+            method,
+            amount
           }
-        : d));
+        ]
+      };
+    }));
     setSelectedDebt(null);
     alert("Repayment simulated!");
   }
