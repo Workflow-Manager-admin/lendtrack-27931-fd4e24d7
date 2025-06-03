@@ -198,9 +198,61 @@ function App() {
         <div className="container" style={{marginTop: 90, marginBottom: 40}}>
           {/* DASHBOARD SUMMARY */}
           <section style={{display: "flex", gap: "24px", marginBottom: 32, flexWrap: "wrap"}}>
-            <SummaryCard label="Outstanding" value={outstanding} color={COLORS.primary} icon="💰"/>
-            <SummaryCard label="Repaid" value={repaid} color={COLORS.accent} icon="✅"/>
             <SummaryCard label="Total Lent" value={totalLent} color={COLORS.secondary} darkText={true} icon="🔢"/>
+            <SummaryCard 
+              label={
+                <span>
+                  Outstanding&nbsp;
+                  <span style={{position: 'relative', display: 'inline-block'}}>
+                    <span 
+                      tabIndex={0}
+                      style={{
+                        cursor: 'pointer', 
+                        display: 'inline-block',
+                        color: '#fff',
+                        fontWeight: 600,
+                        borderRadius: '100%',
+                        width: '17px',
+                        height: '17px',
+                        fontSize: '13px',
+                        verticalAlign: 'middle',
+                        textAlign: 'center', 
+                        background: 'rgba(45,156,219,0.7)'
+                      }}
+                      aria-label="Outstanding explanation"
+                    >?</span>
+                    <span 
+                      style={{
+                        visibility: 'hidden',
+                        opacity: 0,
+                        background: '#232933',
+                        color: '#fff',
+                        textAlign: 'left',
+                        borderRadius: 7,
+                        padding: '7px 10px',
+                        position: 'absolute',
+                        zIndex: 10,
+                        minWidth: 180,
+                        fontSize: 13,
+                        left: '20px',
+                        top: '-6px',
+                        transition: 'opacity 0.14s',
+                        boxShadow: '0 2px 12px rgba(0,0,0,0.22)',
+                        pointerEvents: 'none'
+                      }}
+                      className="outstanding-tooltip"
+                    >
+                      Outstanding: Amount lent out that has not yet been repaid.
+                    </span>
+                  </span>
+                </span>
+              }
+              value={outstanding}
+              color={COLORS.primary}
+              icon="💰"
+              tooltip
+            />
+            <SummaryCard label="Repaid" value={repaid} color={COLORS.accent} icon="✅"/>
           </section>
 
           {/* Debt List */}
