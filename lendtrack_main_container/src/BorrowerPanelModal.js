@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 
 /**
- * BorrowerPanelModal - Opens on dashboard via the Borrower Panel button.
- * Lets the user select a debt and act as a "borrower" to repay or request extension (actions previously in DebtDetailModal).
+ * BorrowerPanelModal - Modal for borrowers to select their debt, see owing details,
+ * choose a payment method (GPay, PhonePe, PayPal), and "Pay" (simulated).
+ * @param {Array} debts - Debts to select from.
+ * @param {Function} onClose - Handler to close modal.
+ * @param {Function} onRepay - Handler for repayment.
+ * @param {Function} onRequestExtension - Handler for extension request.
+ * @param {string} accent - Accent color hex.
+ * @param {string} primary - Primary color hex.
  */
 function BorrowerPanelModal({ debts, onClose, onRepay, onRequestExtension, accent, primary }) {
-  const [selectedDebtId, setSelectedDebtId] = useState("");
-  const [repayAmount, setRepayAmount] = useState("");
-  const [repayMethod, setRepayMethod] = useState("Venmo");
+  const [selectedDebtId, setSelectedDebtId] = useState('');
+  const [payMethod, setPayMethod] = useState('GPay');
+  const [confirmation, setConfirmation] = useState('');
+  
   if (!debts.length) {
     return (
       <Modal onClose={onClose}>
@@ -17,25 +24,36 @@ function BorrowerPanelModal({ debts, onClose, onRepay, onRequestExtension, accen
     );
   }
 
-  const selectedDebt = debts.find(d => String(d.id) === String(selectedDebtId));
+  // Only allow selection of outstanding debts (simulate borrower POV)
+  const outstandingDebts = debts.filter(d => d.status === 'outstanding');
+  const selectedDebt = outstandingDebts.find(d => String(d.id) === String(selectedDebtId));
+
+  function handlePay(e) {
+    e.preventDefault();
+    if (!selectedDebt) return;
+    // Simulate a payment; update actual via onRepay if provided
+    setConfirmation(
+      `Repayment of $${selectedDebt.amount} to ${selectedDebt.borrower} using ${payMethod} successful!`
+    );
+    // Simulate "repay": mark current debt as repaid and give feedback to parent app.
+    if (typeof onRepay === "function") {
+      onRepay(selectedDebt.id, selectedDebt.amount, payMethod);
+    }
+    setTimeout(() => setConfirmation(''), 2000);
+  }
 
   return (
     <Modal onClose={onClose}>
       <h2 style={{ color: accent, fontWeight: 700, marginBottom: 7 }}>
         Borrower Panel
       </h2>
-      <div style={{ marginBottom: 12 }}>
-        <label style={{ fontWeight: 600, marginRight: 8 }}>Select Debt:</label>
+      <div style={{ marginBottom: 10 }}>
+        <label style={{ fontWeight: 600, marginRight: 8 }}>Select Borrower:</label>
         <select
           value={selectedDebtId}
           onChange={e => {
             setSelectedDebtId(e.target.value);
-            // Reset repay UI when debt changes
-            if (e.target.value) {
-              const d = debts.find(x => String(x.id) === String(e.target.value));
-              setRepayAmount(d ? d.amount : "");
-              setRepayMethod("Venmo");
-            }
+            setConfirmation('');
           }}
           style={{
             background: "#181C20",
@@ -47,59 +65,56 @@ function BorrowerPanelModal({ debts, onClose, onRepay, onRequestExtension, accen
             minWidth: 130
           }}
         >
-          <option value="">-- Choose Debt --</option>
-          {debts.map(d =>
+          <option value="">-- Choose Borrower --</option>
+          {outstandingDebts.map(d => (
             <option key={d.id} value={d.id}>
-              {d.borrower} - {d.amount} {d.currency} {"(" + (d.status === "repaid" ? "Paid" : "Outstanding") + ")"}
+              {d.borrower} - ${d.amount} {d.currency}
             </option>
-          )}
+          ))}
         </select>
       </div>
-      {selectedDebt && selectedDebt.status !== "repaid" && (
+      {selectedDebt && (
+        <div style={{
+          background: "#242933",
+          padding: 16, borderRadius: 8, marginBottom: 14,
+          marginTop: 4
+        }}>
+          <div style={{marginBottom: 4}}>
+            <span style={{ fontWeight: 500 }}>Borrower:</span> {selectedDebt.borrower}
+          </div>
+          <div>
+            <span style={{ fontWeight: 500 }}>Amount to Repay:</span>{" "}
+            <span style={{ color: accent, fontWeight: 700 }}>
+              ${selectedDebt.amount}
+            </span>
+          </div>
+        </div>
+      )}
+      {selectedDebt && (
         <>
-          <form
-            onSubmit={e => {
-              e.preventDefault();
-              if (!repayAmount || Number(repayAmount) < 1 || Number(repayAmount) > selectedDebt.amount) return;
-              onRepay(selectedDebt.id, Number(repayAmount), repayMethod);
-              setRepayAmount(selectedDebt.amount);
-            }}
-            style={{ marginBottom: 10 }}
-          >
-            <label style={{ fontWeight: 500 }}>Repay Amount: </label>
-            <input
-              type="number"
-              min="1"
-              max={selectedDebt.amount}
-              value={repayAmount}
-              required
-              onChange={e => setRepayAmount(e.target.value)}
-              style={{
-                margin: "0 10px 5px 0",
-                background: "#181C20",
-                color: "#fff",
-                border: `1px solid ${accent}`,
-                borderRadius: 4,
-                width: 80
-              }}
-            />
-            <label style={{ fontWeight: 500 }}>Method: </label>
-            <select
-              value={repayMethod}
-              onChange={e => setRepayMethod(e.target.value)}
-              style={{
-                marginRight: 10,
-                background: "#181C20",
-                color: "#fff",
-                border: `1px solid ${primary}`,
-                borderRadius: 4
-              }}
-            >
-              <option>Venmo</option>
-              <option>PayPal</option>
-              <option>Cash</option>
-              <option>Bank</option>
-            </select>
+          <form onSubmit={handlePay}>
+            <div style={{ marginBottom: 12 }}>
+              <label htmlFor="pay-method" style={{ fontWeight: 500, marginRight: 12 }}>Payment Method:</label>
+              <select
+                id="pay-method"
+                value={payMethod}
+                onChange={e => setPayMethod(e.target.value)}
+                style={{
+                  background: "#181C20",
+                  color: "#fff",
+                  border: `1px solid ${primary}`,
+                  borderRadius: 5,
+                  fontSize: 15,
+                  padding: "5px 10px",
+                  minWidth: 80
+                }}
+                required
+              >
+                <option value="GPay">GPay</option>
+                <option value="PhonePe">PhonePe</option>
+                <option value="PayPal">PayPal</option>
+              </select>
+            </div>
             <button
               className="btn"
               type="submit"
@@ -107,48 +122,65 @@ function BorrowerPanelModal({ debts, onClose, onRepay, onRequestExtension, accen
                 background: accent,
                 color: "#fff",
                 border: "none",
-                borderRadius: 5,
-                fontSize: 13,
-                marginLeft: 3,
-                marginRight: 3,
-                padding: "6px 12px",
-                cursor: "pointer"
+                borderRadius: 6,
+                fontSize: "1em",
+                fontWeight: 500,
+                padding: "9px 28px",
+                marginBottom: 8,
+                cursor: "pointer",
+                marginRight: 10,
+                boxShadow: "0 2px 8px #27AE6033"
               }}
             >
-              Repay
+              Pay
+            </button>
+            <button
+              type="button"
+              className="btn"
+              style={{
+                background: primary,
+                color: "#fff",
+                border: "none",
+                borderRadius: 6,
+                fontSize: "1em",
+                fontWeight: 500,
+                padding: "8px 13px",
+                marginBottom: 8,
+                cursor: "pointer",
+                marginLeft: 8
+              }}
+              onClick={() => onRequestExtension(selectedDebt.id)}
+            >
+              Request Extension
             </button>
           </form>
-          <button
-            className="btn"
-            style={{
-              background: primary,
-              color: "#fff",
-              border: "none",
-              borderRadius: 5,
-              fontSize: 13,
-              marginLeft: 0,
-              marginRight: 7,
-              padding: "6px 12px",
-              cursor: "pointer"
-            }}
-            onClick={() => onRequestExtension(selectedDebt.id)}
-          >
-            Request Extension
-          </button>
+          {confirmation && (
+            <div style={{
+              background: "#18395a",
+              color: "#7ef8aa",
+              border: `1.5px solid #43eb92`,
+              borderRadius: 7,
+              padding: "10px 13px",
+              marginTop: 10,
+              textAlign: "center",
+              fontWeight: 600
+            }}>
+              {confirmation}
+            </div>
+          )}
         </>
       )}
-      {selectedDebt && selectedDebt.status === "repaid" && (
-        <div style={{ margin: "12px 0", color: accent }}>
-          This debt is already fully paid.
+      {!selectedDebtId && (
+        <div style={{ color: "#cccc", marginTop: 13 }}>
+          Select a borrower to proceed with payment.
         </div>
       )}
     </Modal>
   );
 }
 
-// Simple Modal re-use (just import Modal from main file)
+// Simple Modal reuse (copied from App.js for style parity)
 function Modal({ children, onClose }) {
-  // The Modal styling and semantics should match App.js
   return (
     <div
       style={{
@@ -164,7 +196,7 @@ function Modal({ children, onClose }) {
           color: "#fff",
           borderRadius: 16,
           boxShadow: "0 4px 24px 0 #000a",
-          maxWidth: "95vw",
+          maxWidth: "97vw",
           width: 430,
           position: "fixed",
           left: "50%",
