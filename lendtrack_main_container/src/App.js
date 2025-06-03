@@ -216,38 +216,8 @@ function DashboardPage() {
         <div className="container" style={{marginTop: 90, marginBottom: 40}}>
           <section style={{display: "flex", gap: "24px", marginBottom: 32, flexWrap: "wrap"}}>
             <SummaryCard label="Total Lent" value={totalLent} color={COLORS.secondary} darkText={true} icon="🔢"/>
-            <SummaryCard 
-              label={
-                <span>
-                  Outstanding&nbsp;
-                  <span className="outstanding-tooltip-container">
-                    <span
-                      tabIndex={0}
-                      aria-label="Outstanding explanation"
-                      style={{
-                        cursor: 'pointer',
-                        display: 'inline-block',
-                        color: '#fff',
-                        fontWeight: 600,
-                        borderRadius: '100%',
-                        width: '17px',
-                        height: '17px',
-                        fontSize: '13px',
-                        verticalAlign: 'middle',
-                        textAlign: 'center',
-                        background: 'rgba(45,156,219,0.7)',
-                        outline: 'none'
-                      }}
-                    >?</span>
-                    <span
-                      className="outstanding-tooltip"
-                      role="tooltip"
-                    >
-                      Outstanding: Amount lent out that has not yet been repaid.
-                    </span>
-                  </span>
-                </span>
-              }
+            <SummaryCard
+              label={<OutstandingLabelWithTooltip />}
               value={outstanding}
               color={COLORS.primary}
               icon="💰"
