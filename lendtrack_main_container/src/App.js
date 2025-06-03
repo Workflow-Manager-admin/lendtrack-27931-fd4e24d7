@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Welcome from './Welcome';
+// Import the new Borrower panel modal
+import BorrowerPanelModal from './BorrowerPanelModal';
 
 /**
  * Colors for theme (as per LendTrack spec)
