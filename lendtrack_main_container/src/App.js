@@ -56,7 +56,7 @@ const initialDebts = [
     lentDate: '2024-04-05',
     dueDate: '2024-05-07',
     reason: 'Dinner outing',
-    status: 'outstanding', // or 'repaid'
+    status: 'not paid', // or 'repaid'
     isAnonymous: false,
     remindersSent: 1,
     history: [
@@ -87,7 +87,7 @@ const initialDebts = [
     lentDate: '2023-12-01',
     dueDate: '2024-02-01',
     reason: 'Short-term rent help',
-    status: 'outstanding',
+    status: 'not paid',
     isAnonymous: false,
     remindersSent: 0,
     history: [],
@@ -113,7 +113,7 @@ function DashboardPage() {
 
   // --- Stats Aggregation ---
   const totalLent = debts.reduce((acc, d) => acc + d.amount, 0);
-  const outstanding = debts.filter(d => d.status === 'outstanding').reduce((acc, d) => acc + d.amount, 0);
+  const notPaid = debts.filter(d => d.status === 'not paid').reduce((acc, d) => acc + d.amount, 0);
   const repaid = debts.filter(d => d.status === 'repaid').reduce((acc, d) => acc + d.amount, 0);
 
   // --- Debt Actions ---
@@ -122,7 +122,7 @@ function DashboardPage() {
       {
         ...entry,
         id: Date.now(),
-        status: 'outstanding',
+        status: 'not paid',
         isAnonymous: reminderSettings.anonymous,
         remindersSent: 0,
         history: [],
