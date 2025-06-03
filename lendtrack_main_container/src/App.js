@@ -220,11 +220,12 @@ function DashboardPage() {
               label={
                 <span>
                   Outstanding&nbsp;
-                  <span style={{position: 'relative', display: 'inline-block'}}>
-                    <span 
+                  <span className="outstanding-tooltip-container">
+                    <span
                       tabIndex={0}
+                      aria-label="Outstanding explanation"
                       style={{
-                        cursor: 'pointer', 
+                        cursor: 'pointer',
                         display: 'inline-block',
                         color: '#fff',
                         fontWeight: 600,
@@ -233,31 +234,14 @@ function DashboardPage() {
                         height: '17px',
                         fontSize: '13px',
                         verticalAlign: 'middle',
-                        textAlign: 'center', 
-                        background: 'rgba(45,156,219,0.7)'
+                        textAlign: 'center',
+                        background: 'rgba(45,156,219,0.7)',
+                        outline: 'none'
                       }}
-                      aria-label="Outstanding explanation"
                     >?</span>
-                    <span 
-                      style={{
-                        visibility: 'hidden',
-                        opacity: 0,
-                        background: '#232933',
-                        color: '#fff',
-                        textAlign: 'left',
-                        borderRadius: 7,
-                        padding: '7px 10px',
-                        position: 'absolute',
-                        zIndex: 10,
-                        minWidth: 180,
-                        fontSize: 13,
-                        left: '20px',
-                        top: '-6px',
-                        transition: 'opacity 0.14s',
-                        boxShadow: '0 2px 12px rgba(0,0,0,0.22)',
-                        pointerEvents: 'none'
-                      }}
+                    <span
                       className="outstanding-tooltip"
+                      role="tooltip"
                     >
                       Outstanding: Amount lent out that has not yet been repaid.
                     </span>
