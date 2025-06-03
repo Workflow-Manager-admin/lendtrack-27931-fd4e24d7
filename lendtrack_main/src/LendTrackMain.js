@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Tooltip from "./Tooltip";
 
 /**
  * Color constants for palette
@@ -265,9 +266,13 @@ function LendTrackMain() {
             title="Total Lent"
             amount={totalLent}
           />
+          {/* Outstanding card with Tooltip */}
           <DashboardCard
             color={COLORS.accent}
-            title="Outstanding"
+            // Instead of title="Outstanding", wrap with tooltip
+            title={
+              <OutstandingWithTooltip />
+            }
             amount={totalOutstanding}
           />
           <DashboardCard
