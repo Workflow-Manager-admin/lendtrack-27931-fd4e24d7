@@ -27,9 +27,15 @@ function LendTrackMain() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [selectedDebt, setSelectedDebt] = useState(null);
-  const [settings, setSettings] = useState({
-    reminderTone: "soft",
-    anonymous: true
+  // Settings state: loads from localStorage if present, otherwise uses defaults
+  const [settings, setSettings] = useState(() => {
+    const saved = window.localStorage.getItem("lt_user_settings");
+    return saved
+      ? JSON.parse(saved)
+      : {
+          reminderTone: "soft",
+          anonymous: true
+        };
   });
 
   // Derived summary
@@ -130,6 +136,8 @@ function LendTrackMain() {
   // PUBLIC_INTERFACE
   function handleSettingsChange(newSettings) {
     setSettings(newSettings);
+    window.localStorage.setItem("lt_user_settings", JSON.stringify(newSettings));
+    alert("Settings saved!");
   }
 
   // Borrower actions (simulate borrower view)
