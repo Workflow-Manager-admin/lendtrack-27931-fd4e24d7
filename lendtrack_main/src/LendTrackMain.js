@@ -362,49 +362,7 @@ function LendTrackMain() {
       )}
 
       {/* Custom Style */}
-      <style>
-        {`
-        .lt-btn {
-          border: none;
-          border-radius: 6px;
-          padding: 10px 18px;
-          margin: 0 2px;
-          font-weight: 500;
-          font-size: .98rem;
-          cursor: pointer;
-          transition: background 0.16s;
-        }
-        .lt-btn[disabled] {
-          opacity: 0.4;
-          cursor: not-allowed;
-        }
-        .lt-container {
-          width: 90%;
-          max-width: 950px;
-          margin: 0 auto;
-          display: flex;
-        }
-        input, select, textarea {
-          background: #232837;
-          color: ${COLORS.secondary};
-          border: 1px solid #435366;
-          border-radius: 7px;
-          padding: 9px 13px;
-          margin-bottom: 12px;
-          font-size: 1rem;
-          outline: none;
-        }
-        input:focus, select:focus, textarea:focus {
-          border-color: ${COLORS.primary};
-        }
-        label {
-          color: ${COLORS.primary};
-          font-weight: 500;
-          display: block;
-          margin-bottom: 3px;
-        }
-        `}
-      </style>
+      {/* Most style now handled via App.css for consistency and maintainability */}
     </div>
   );
 }
