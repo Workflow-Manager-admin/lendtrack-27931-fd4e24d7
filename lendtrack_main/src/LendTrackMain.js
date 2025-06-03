@@ -770,18 +770,27 @@ function SettingsPanel({ settings, onChange, accentColor, primaryColor }) {
   );
 }
 
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * Modal dialog that centers children in the visible window and ensures that content is never clipped by viewport boundaries.
+ * If the modal's content exceeds the available vertical space, a scroll bar appears to give full visibility.
+ */
 function Modal({ children, onClose }) {
   return (
     <div
       style={{
         position: "fixed",
-        top: 0, left: 0, right: 0, bottom: 0,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
         background: "rgba(25,26,30,0.82)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        zIndex: 1001
+        zIndex: 1001,
+        overflow: "auto",
+        padding: 24
       }}
       onMouseDown={onClose}
     >
@@ -794,15 +803,20 @@ function Modal({ children, onClose }) {
           padding: 30,
           minWidth: 280,
           maxWidth: "95vw",
+          maxHeight: "98vh",
+          overflowY: "auto",
           border: "1.5px solid #2D9CDB",
-          position: "relative"
+          position: "relative",
+          display: "flex",
+          flexDirection: "column"
         }}
       >
         <button
           className="lt-btn"
           style={{
             position: "absolute",
-            top: 14, right: 14,
+            top: 14,
+            right: 14,
             background: "#1d232d",
             color: "#fff",
             border: "none",
