@@ -211,6 +211,28 @@ body {
   word-break: break-word;
 }
 
+/* New: horizontal action button group styling for debt row buttons */
+.debt-actions-btn-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  /* Reasonable line wrap for extra small screens/overflow */
+  justify-content: flex-start;
+}
+
+@media (max-width: 720px) {
+  .debt-actions-btn-row {
+    gap: 7px;
+  }
+}
+@media (max-width: 460px) {
+  .debt-actions-btn-row {
+    gap: 5px;
+  }
+}
+
 /* Responsive scroll wrapper for wide tables */
 .debts-table-scroll-wrapper {
   width: 100%;

@@ -423,24 +423,26 @@ function DebtList({
               {d.status.charAt(0).toUpperCase() + d.status.slice(1)}
             </td>
             <td className="actions-cell">
-              <button className="btn" style={miniBtnStyle(primary)} onClick={()=>onView(d)}>View</button>
-              {d.status !== 'repaid' && (
-                <>
-                  <button className="btn" style={miniBtnStyle(primary)} onClick={()=>onRemind(d)}>
-                    Remind
-                  </button>
-                  <button className="btn" style={miniBtnStyle(accent)} onClick={()=>onMarkPaid(d.id)}>
-                    Mark Paid
-                  </button>
-                  {/* Add repayment buttons */}
-                  <button className="btn" style={miniBtnStyle(accent)} onClick={() => onRepayFull(d)}>
-                    Full Payment
-                  </button>
-                  <button className="btn" style={miniBtnStyle(primary)} onClick={() => onRepayInstallment(d)}>
-                    Installment Payment
-                  </button>
-                </>
-              )}
+              <div className="debt-actions-btn-row">
+                <button className="btn" style={miniBtnStyle(primary)} onClick={()=>onView(d)}>View</button>
+                {d.status !== 'repaid' && (
+                  <>
+                    <button className="btn" style={miniBtnStyle(primary)} onClick={()=>onRemind(d)}>
+                      Remind
+                    </button>
+                    <button className="btn" style={miniBtnStyle(accent)} onClick={()=>onMarkPaid(d.id)}>
+                      Mark Paid
+                    </button>
+                    {/* Add repayment buttons */}
+                    <button className="btn" style={miniBtnStyle(accent)} onClick={() => onRepayFull(d)}>
+                      Full Payment
+                    </button>
+                    <button className="btn" style={miniBtnStyle(primary)} onClick={() => onRepayInstallment(d)}>
+                      Installment Payment
+                    </button>
+                  </>
+                )}
+              </div>
             </td>
           </tr>
         ))}
