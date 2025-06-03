@@ -667,4 +667,145 @@ function inputStyle() {
   };
 }
 
+/** OutstandingMetric Tooltip Component
+ * Shows a floating explanatory tooltip for Outstanding when hovered, focused, or tapped.
+ * a11y: fully keyboard accessible, ARIA roles, mobile tap (toggles), escape closes, focus managed. */
+function OutstandingLabelWithTooltip() {
+  const [show, setShow] = React.useState(false);
+  const infoRef = React.useRef(null);
+  const labelRef = React.useRef(null);
+  const tooltipId = "outstanding-expl-tooltip";
+  // Hide tooltip on ESC
+  React.useEffect(() => {
+    function onKeyDown(e) {
+      if (e.key === "Escape") setShow(false);
+    }
+    if (show) {
+      window.addEventListener("keydown", onKeyDown);
+      return () => window.removeEventListener("keydown", onKeyDown);
+    }
+  }, [show]);
+  // Mobile: tap <-> toggle, click outside hides
+  React.useEffect(() => {
+    function handleTouchOrClick(e) {
+      if (
+        infoRef.current && !infoRef.current.contains(e.target) &&
+        labelRef.current && !labelRef.current.contains(e.target)
+      ) setShow(false);
+    }
+    if (show) {
+      window.addEventListener("touchstart", handleTouchOrClick, { passive: true });
+      window.addEventListener("mousedown", handleTouchOrClick);
+      return () => {
+        window.removeEventListener("touchstart", handleTouchOrClick);
+        window.removeEventListener("mousedown", handleTouchOrClick);
+      };
+    }
+  }, [show]);
+  // Tooltip visually near the icon or label. Anchored with relative positioning.
+
+  // Event handlers
+  const handleShow = () => setShow(true);
+  const handleHide = () => setShow(false);
+  const handleToggle = e => { e.preventDefault(); setShow(v => !v); };
+
+  // Touch support: treat tap as toggle on info icon
+  // Hide after delay for accessibility on blur/touch out
+  let hideTimeout = null;
+  function delayedHide() {
+    hideTimeout = setTimeout(() => setShow(false), 120);
+  }
+  function clearHideTimeout() {
+    if (hideTimeout) clearTimeout(hideTimeout);
+  }
+
+  return (
+    <span style={{ display: "inline-flex", alignItems: "center", position: "relative" }}>
+      <span
+        ref={labelRef}
+        tabIndex={0}
+        aria-describedby={show ? tooltipId : undefined}
+        style={{ cursor: "pointer", outline: "none", fontWeight: 600 }}
+        onMouseEnter={handleShow}
+        onFocus={handleShow}
+        onMouseLeave={delayedHide}
+        onBlur={delayedHide}
+        onKeyDown={e => {if (e.key==='Enter' || e.key===' ') { setShow(v=>!v); e.preventDefault(); }}}
+        // disables double focus toggle for icon & label
+        onTouchStart={handleToggle}
+        role="button"
+        aria-label="Show Outstanding explanation"
+      >
+        Outstanding
+      </span>
+      <span
+        ref={infoRef}
+        tabIndex={0}
+        aria-describedby={show ? tooltipId : undefined}
+        aria-label="Outstanding explanation information"
+        style={{
+          marginLeft: 3,
+          borderRadius: "50%",
+          width: 18, height: 18,
+          background: "rgba(45,156,219,0.85)",
+          color: "#fff",
+          fontWeight: 800,
+          fontSize: 13.5,
+          lineHeight: "18px",
+          textAlign: "center",
+          cursor: "pointer",
+          display: "inline-block",
+          border: "none",
+          outline: "none",
+          position: "relative",
+          boxShadow: show ? "0 2px 12px #2d9cdb44" : undefined,
+        }}
+        onMouseEnter={handleShow}
+        onFocus={handleShow}
+        onMouseLeave={delayedHide}
+        onBlur={delayedHide}
+        onTouchStart={handleToggle}
+        onKeyDown={e => {if (e.key==='Enter' || e.key===' ') { setShow(v=>!v); e.preventDefault(); }}}
+        role="button"
+      >
+        ?
+      </span>
+      {/* Floating tooltip */}
+      {show && (
+        <span
+          id={tooltipId}
+          role="tooltip"
+          aria-live="polite"
+          style={{
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+            bottom: "120%",
+            minWidth: 210,
+            background: "#161e27",
+            color: "#fff",
+            border: "1.5px solid #2d9cdb",
+            borderRadius: 7,
+            padding: "10px 16px",
+            whiteSpace: "normal",
+            boxShadow: "0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330",
+            zIndex: 90,
+            fontSize: 14.2,
+            fontWeight: 500,
+            pointerEvents: "none", // disables accidental hover in tooltip
+            userSelect: "text",
+            textAlign: "left",
+            // Animation
+            opacity: 1,
+            transition: "opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17)",
+          }}
+        >
+          <b>Outstanding</b>: Amount lent out that has not yet been repaid.<br/>
+          <span style={{opacity:0.65, fontWeight:400, fontSize:13}}>Tap or press "?" or "Outstanding" for info</span>
+        </span>
+      )}
+    </span>
+  );
+}
+
 export default App;

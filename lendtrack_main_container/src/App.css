@@ -6,6 +6,49 @@
   --border-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
+}
+
 body {
   margin: 0;
   font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
@@ -15,10 +58,96 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
+}
+
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
 }
 
 .navbar {
@@ -35,6 +164,49 @@ body {
   z-index: 100;
 }
 
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
+}
+
 .logo {
   font-size: 1.25rem;
   font-weight: 600;
@@ -43,8 +215,94 @@ body {
   gap: 8px;
 }
 
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
+}
+
 .logo-symbol {
   color: var(--base-light);
+}
+
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
 }
 
 .container {
@@ -53,6 +311,49 @@ body {
   padding: 0 24px;
   width: 100%;
   box-sizing: border-box;
+}
+
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
 }
 
 .hero {
@@ -65,10 +366,96 @@ body {
   gap: 24px;
 }
 
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
+}
+
 .subtitle {
   color: var(--base-light);
   font-weight: 500;
   font-size: 1.1rem;
+}
+
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
 }
 
 .title {
@@ -78,12 +465,98 @@ body {
   margin: 0;
 }
 
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
+}
+
 .description {
   font-size: 1.1rem;
   line-height: 1.5;
   color: var(--text-secondary);
   max-width: 600px;
   margin-bottom: 16px;
+}
+
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
 }
 
 .btn {
@@ -98,11 +571,140 @@ body {
   transition: background-color 0.2s ease;
 }
 
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
+}
+
 .btn:hover {
   background-color: #7691ff;
+}
+
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
 }
 
 .btn-large {
   padding: 12px 24px;
   font-size: 1.1rem;
+}
+
+/* Outstanding Tooltip Styles - Floating, accessible, visually distinct */
+.outstanding-tooltip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120%;
+  min-width: 210px;
+  background: #161e27;
+  color: #fff;
+  border: 1.5px solid #2d9cdb;
+  border-radius: 7px;
+  padding: 10px 16px;
+  white-space: normal;
+  box-shadow: 0 7px 32px 0 #091933e0, 0 2px 12px 0 #1cf9f330;
+  z-index: 90;
+  font-size: 14.2px;
+  font-weight: 500;
+  pointer-events: none;
+  user-select: text;
+  text-align: left;
+  opacity: 1;
+  transition: opacity 0.13s cubic-bezier(.42,1.97,.56,-0.17);
+}
+/* Info icon focus: visually highlight */
+.outstanding-tooltip-icon:focus {
+  box-shadow: 0 0 0 2px #2d9cdb, 0 2px 12px #2d9cdb88;
+  outline: 2px solid #2d9cdb;
+}
+
+/* Responsive for mobile: tooltip above and stretches if needed */
+@media (max-width: 600px) {
+  .outstanding-tooltip {
+    left: 0;
+    right: 0;
+    min-width: 90vw;
+    max-width: 98vw;
+    transform: none;
+    font-size: 14px;
+    padding: 10px 10px;
+    line-break: anywhere;
+  }
 }
