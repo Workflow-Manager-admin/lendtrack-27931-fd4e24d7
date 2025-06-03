@@ -55,7 +55,10 @@ body {
   padding: 0 24px;
   width: 100%;
   box-sizing: border-box;
+  /* Remove max-height or overflow that could restrict growth */
 }
+
+/* Ensure no artificial section height limits for debts */
 
 .hero {
   padding-top: 120px;

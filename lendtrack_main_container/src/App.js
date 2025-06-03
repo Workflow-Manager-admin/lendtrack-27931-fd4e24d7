@@ -257,6 +257,12 @@ function DashboardPage() {
             boxShadow: "0 2px 8px rgba(40,56,80,0.10)",
             padding: 18,
             marginBottom: 18,
+            width: "100%",
+            // Remove fixed height, maxHeight, minHeight, and overflow to allow full content display
+            maxHeight: "none",
+            minHeight: 0,
+            height: "auto",
+            overflow: "visible"
           }}>
             <h2 style={{
               fontSize: "1.3rem",
@@ -382,7 +388,7 @@ function DebtList({
     return <div style={{padding: 12, color: "#D5DDE6"}}>No debts found.</div>;
 
   return (
-    <div style={{overflowX: 'auto'}}>
+    <div>
       <table style={{
         width: "100%",
         borderCollapse: "collapse",
