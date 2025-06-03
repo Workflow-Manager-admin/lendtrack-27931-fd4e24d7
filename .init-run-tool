@@ -1,0 +1,4 @@
+{
+    "command": "PORT=<port> BROWSER=none npm start",
+    "working_directory": "/home/kavia/workspace/code-generation/lendtrack-27931-fd4e24d7/lendtrack_main_container"
+}
